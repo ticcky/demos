@@ -16,6 +16,8 @@ def generate_essay(file_name):
     # have nltk tokenize it on whitespaces
     words = nltk.WhitespaceTokenizer().tokenize(text)
     # word = ['this', 'is', 'my', 'essay', ...]
+    
+    fd = nltk.FreqDist(words)  # count the word occurances
 
     # let's see if Zipf's law is really a law... let's plot
     ranks = []  # x axis
@@ -33,7 +35,6 @@ def generate_essay(file_name):
     # now let's get back to our essay generation
 
     # try generating the essay using only unigrams
-    fd = nltk.FreqDist(words)  # count the word occurances
     pd = nltk.MLEProbDist(fd)  # create maximum likelihood probability
                                # distribution based on the counts
 
@@ -59,7 +60,7 @@ def generate_essay(file_name):
 
 
 def print_help():
-    print "Usage: {name} [file with previous essays compilation]".format(name=argv[1])
+    print "Usage: {name} [file with previous essays compilation]".format(name=sys.argv[0])
 
 
 if __name__ == "__main__":
